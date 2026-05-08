@@ -15,7 +15,10 @@ public class User
     public string Name {get; private set;} = string.Empty;
     public DateTime CreatedAt {get; private set;}
 
-    public IReadOnlyCollection<TaskItem> _task =[];
+    // IReadOnlyCollection expone las tareas sin permitir modificación externa
+    public IReadOnlyCollection<TaskItem> Tasks => _tasks.AsReadOnly();
+
+    private readonly List<TaskItem> _tasks = [];
 
     private User(){}
     public static User Create(string email, string passwordHash, string name)

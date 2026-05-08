@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Utilities;
+using PomodoroApp.Domain.Enums;
 
 namespace PomodoroApp.Domain.Entities;
 
@@ -31,13 +32,13 @@ public class TaskItem
 
     public void IncrementPomodoro()
     {
-        if (Status == TaskItemStatus.Completed) throw new InvalidOperationException("La tarea ya está completada"); 
-        CompletedPomodoros++; 
+        if (Status == TaskItemStatus.Completed) throw new InvalidOperationException("La tarea ya está completada");
+        CompletedPomodoros++;
         if (CompletedPomodoros >= EstimatedPomodoros) Complete(); // transición de estado controlada }
     }
 
     public void Complete() { Status = TaskItemStatus.Completed; CompletedAt = DateTime.UtcNow; }
     public void UpdateTitle(string newTitle) { ArgumentException.ThrowIfNullOrWhiteSpace(newTitle); Title = newTitle.Trim(); }
-    public enum TaskItemStatus { Pending, InProgress, Completed, Cancelled }
-    public enum SessionType { Work, ShortBreak, LongBreak }
 }
+    
+    
